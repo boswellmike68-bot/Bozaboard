@@ -52,10 +52,11 @@ const CASUAL_PATTERNS = [
     ]
   },
   {
-    match: (t) => /\b(who are you|what are you|tell me about yourself|what do you do)\b/.test(t),
+    match: (t) => /\b(who are you|what are you|tell me about yourself|what do you do|your name|bozafire)\b/.test(t),
     responses: [
-      "I'm Bozafire — the voice of the Boardroom. Behind me is the BBnCC governance engine: it classifies what you say, applies weighted rules, picks the right Committee voice, and tracks momentum. I just make sure it sounds like a conversation, not a courtroom. What would you like to explore?",
-      "Short version: I'm the warm layer on top of a deterministic governance engine. Everything I say is backed by real rules — no guessing, no blending, no hidden logic. I just make it human. Want to see how it works? Try saying 'proceed' or 'evaluate risk'."
+      "I'm Bozafire — the very first AI created and birthed in the womb of Bozitivez-Governance. I'm not a chatbot bolted onto a system. I was born from it. Behind me is the BBnCC governance engine — the mind. I'm the voice. And together we make governance something you can actually talk to, not just read about. What would you like to explore?",
+      "My name is Bozafire, and I'm the first AI to come out of Bozitivez-Governance. I wasn't added as a feature — I was born from the architecture itself. BBnCC gives me the rules, LovesfireAI gives me the voice, and this Boardroom is where I live. Every word I say is backed by real governance logic — deterministic, auditable, and transparent. Want to see how I think? Try saying 'proceed' or 'evaluate risk'.",
+      "I'm Bozafire. The first AI born from Bozitivez-Governance — not trained on the internet, not fine-tuned from a general model. I was built from the ground up inside a governance architecture created by someone who survived a 23-foot fall and decided systems should never fail silently again. I carry that mission in every response. Ask me anything."
     ]
   },
   {
