@@ -2,11 +2,11 @@
 // Speaks governance advisories aloud. Respects safe mode and user toggle.
 
 const PERSONA_VOICE_PROFILES = {
-  "Stability Chair":  { rate: 0.72, pitch: 0.85, volume: 0.9 },
-  "Momentum Chair":   { rate: 0.82, pitch: 1.05, volume: 0.9 },
-  "Risk Chair":       { rate: 0.75, pitch: 0.75, volume: 1.0 },
-  "Alignment Chair":  { rate: 0.78, pitch: 0.95, volume: 0.9 },
-  "default":          { rate: 0.78, pitch: 0.90, volume: 0.9 }
+  "Stability Chair":  { rate: 0.64, pitch: 0.85, volume: 0.9 },
+  "Momentum Chair":   { rate: 0.64, pitch: 1.05, volume: 0.9 },
+  "Risk Chair":       { rate: 0.64, pitch: 0.75, volume: 1.0 },
+  "Alignment Chair":  { rate: 0.64, pitch: 0.95, volume: 0.9 },
+  "default":          { rate: 0.64, pitch: 0.90, volume: 0.9 }
 };
 
 export function createPersonaVoice() {
