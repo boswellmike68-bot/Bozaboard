@@ -5,6 +5,7 @@ import { parseHeadings } from "./parseHeadings.js";
 import { parseLists } from "./parseLists.js";
 import { wrapBBnCC, wrapReset, getSessionState, getBozafireGreeting, getDemoGreeting, DEMO_TOUR } from "./lovesfire.js";
 import { isDemoMode, hasFullAccess, getDemoLimits } from "./AccessKey.js";
+import { getPrefs, isBrailleMode, isListenMode } from "./AccessibilityPrefs.js";
 import { createPersonaController } from "./persona-controller.js";
 
 const RESONANCE_DELAY_MS = 65;
@@ -862,9 +863,28 @@ export function bootBoardroom() {
     const safeMode = safeModeGetter();
     const demoMode = isDemoMode();
     const greeting = demoMode ? getDemoGreeting() : getBozafireGreeting();
-    const suffix = demoMode
-      ? " Bozafire will guide you through the full experience. Sit back."
-      : " The 13 Orbs are synchronized. Resonance is locked at 0.85x. The Boardroom is yours.";
+
+    // Build preferences-aware suffix
+    const prefs = getPrefs();
+    let prefNotes = [];
+    if (prefs.communicationMode === "listen") prefNotes.push("Audio mode is noted — voice output is prioritized for you");
+    if (prefs.communicationMode === "braille") prefNotes.push("Screen reader mode is active — the interface is optimized for your device");
+    if (prefs.signLanguage && prefs.signLanguage !== "none") prefNotes.push("Your sign language preference (" + prefs.signLanguage.toUpperCase() + ") is on record");
+    if (prefs.preferredLanguage && prefs.preferredLanguage !== "en") prefNotes.push("Your language preference is noted — full translation support is on the roadmap");
+    if (prefs.country) prefNotes.push("Country: " + prefs.country + " — applicable law awareness is active");
+    if (prefs.applicableLaw && prefs.applicableLaw.length > 0) prefNotes.push("Legal frameworks acknowledged: " + prefs.applicableLaw.map(l => l.toUpperCase()).join(", "));
+    if (prefs.religiousBeliefs && prefs.religiousBeliefs !== "none") prefNotes.push("Cultural context is respected and on the record");
+    if (prefs.customNotes) prefNotes.push("Your additional needs are noted: " + prefs.customNotes);
+
+    let suffix;
+    if (demoMode) {
+      suffix = " Bozafire will walk you through the experience at your pace.";
+    } else {
+      suffix = " The 13 Orbs are synchronized. Resonance is locked at 0.85x. The Boardroom is yours.";
+    }
+    if (prefNotes.length > 0) {
+      suffix += " Your accessibility preferences are locked in: " + prefNotes.join(". ") + ".";
+    }
     const fullMessage = greeting + suffix;
 
     greeter.textContent = "";

@@ -100,10 +100,11 @@ const CASUAL_PATTERNS = [
     ]
   },
   {
-    match: (t) => /\b(abi|brain injury|acquired brain|accessibility|why accessible|why high contrast|cognitive)\b/.test(t),
+    match: (t) => /\b(abi|brain injury|acquired brain|accessibility|why accessible|why high contrast|cognitive|preferences|accommodate|accommodation|braille|sign language|language preference|legal framework|law awareness)\b/.test(t),
     responses: [
       "The accessibility-first design isn't a feature — it's the foundation. The architect sustained an ABI (Acquired Brain Injury) in the fall. The cognitive issues that followed — memory, processing speed, focus — are exactly what this system was originally built to help with. High contrast, low cognitive load, deterministic responses, no surprises — these aren't design choices, they're survival requirements. The governance was created for human and AI alike, because the architect discovered that AI systems had the same blind spots his own brain now had.",
-      "Every design decision here — high contrast, zero animations in Safe Mode, deterministic behavior, no hidden logic — comes from lived experience with ABI. The architect knows firsthand what it's like when interfaces assume you can process fast, track motion, and hold context. He also knows what it's like when an AI chat resets and forgets everything you said. Both are silent failures. This system was built to fix both — for the human using it and for the AI inside it. That's real accessibility."
+      "Every design decision here — high contrast, zero animations in Safe Mode, deterministic behavior, no hidden logic — comes from lived experience with ABI. The architect knows firsthand what it's like when interfaces assume you can process fast, track motion, and hold context. He also knows what it's like when an AI chat resets and forgets everything you said. Both are silent failures. This system was built to fix both — for the human using it and for the AI inside it. That's real accessibility.",
+      "Before you even enter this Boardroom, the system asks how you need it to work for you. Read, listen, or braille. Sign language preference. Your language, your country, your cultural context, your applicable legal frameworks. This isn't a checkbox exercise — it's governance. If the system claims to serve everyone, it has to actually ask everyone what they need. Your preferences are stored and respected throughout the session. That's what accessible means."
     ]
   },
   {

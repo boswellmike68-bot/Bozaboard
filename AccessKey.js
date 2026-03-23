@@ -59,9 +59,18 @@ export async function verifyAccess(options = {}) {
   window.__bozaboardDemoCount = 0;
 
   if (tier !== "denied") {
-    if (typeof window.runWelcomeSequence === "function") {
-      window.runWelcomeSequence();
-    }
+    // Show accessibility preferences screen before entering boardroom
+    const gate = document.getElementById("gatekeeper-ui");
+    const prefs = document.getElementById("prefsScreen");
+    if (gate) gate.style.display = "none";
+    if (prefs) prefs.style.display = "block";
+    // Store the launch callback — preferences screen will call it
+    window.__bozaLaunchBoardroom = function () {
+      if (prefs) prefs.style.display = "none";
+      if (typeof window.runWelcomeSequence === "function") {
+        window.runWelcomeSequence();
+      }
+    };
     return { status: "ok", tier };
   }
 

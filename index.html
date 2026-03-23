@@ -517,6 +517,165 @@
             animation: none !important;
             transition: none !important;
         }
+        /* ── Accessibility Preferences Screen ── */
+        #prefsScreen {
+            display: none;
+            text-align: left;
+            border: 2px solid #50C878;
+            padding: 28px 32px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.88);
+            box-shadow: 0 0 24px rgba(80, 200, 120, 0.2);
+            max-width: 620px;
+            width: calc(100vw - 48px);
+            max-height: calc(100vh - 48px);
+            overflow-y: auto;
+        }
+
+        #prefsScreen h2 {
+            text-align: center;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin: 0 0 6px;
+            font-size: 1.3rem;
+        }
+
+        #prefsScreen .prefs-subtitle {
+            text-align: center;
+            color: #50C878;
+            font-size: 0.9rem;
+            margin: 0 0 20px;
+            font-style: italic;
+        }
+
+        .prefs-section {
+            margin-bottom: 18px;
+        }
+
+        .prefs-section label {
+            display: block;
+            font-size: 0.95rem;
+            color: #D4AF37;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .prefs-section .prefs-hint {
+            font-size: 0.82rem;
+            color: rgba(80,200,120,0.8);
+            margin-bottom: 8px;
+        }
+
+        .prefs-section select,
+        .prefs-section input[type="text"] {
+            width: 100%;
+            background: rgba(18,18,18,0.6);
+            border: 1px solid rgba(212,175,55,0.4);
+            color: #D4AF37;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .prefs-section select:focus,
+        .prefs-section input[type="text"]:focus {
+            border-color: rgba(80,200,120,0.7);
+        }
+
+        .prefs-radio-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .prefs-radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border: 1px solid rgba(212,175,55,0.35);
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: border-color 200ms, background 200ms;
+            margin-bottom: 0;
+        }
+
+        .prefs-radio-group label:hover {
+            border-color: rgba(80,200,120,0.6);
+        }
+
+        .prefs-radio-group input[type="radio"]:checked + span,
+        .prefs-radio-group input[type="checkbox"]:checked + span {
+            color: #50C878;
+        }
+
+        .prefs-radio-group label:has(input:checked) {
+            border-color: rgba(80,200,120,0.7);
+            background: rgba(80,200,120,0.08);
+        }
+
+        .prefs-checkbox-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .prefs-checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 12px;
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+
+        .prefs-checkbox-group label:has(input:checked) {
+            border-color: rgba(80,200,120,0.7);
+            background: rgba(80,200,120,0.08);
+        }
+
+        .prefs-checkbox-group label:has(input:checked) span {
+            color: #50C878;
+        }
+
+        #prefsEnterBtn {
+            display: block;
+            width: 100%;
+            margin-top: 22px;
+            background: transparent;
+            border: 2px solid rgba(80,200,120,0.85);
+            color: rgba(80,200,120,0.95);
+            padding: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            letter-spacing: 1.5px;
+        }
+
+        #prefsEnterBtn:hover {
+            background: rgba(80,200,120,0.08);
+        }
+
+        .prefs-skip {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: rgba(212,175,55,0.6);
+            font-size: 0.82rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .prefs-skip:hover {
+            color: rgba(212,175,55,0.9);
+        }
     </style>
 </head>
 <body>
@@ -530,6 +689,119 @@
             <button id="demoBtn" class="launch" type="button" style="background:transparent;border-color:#D4AF37;color:#D4AF37;font-size:0.85rem;">Try Demo</button>
         </div>
         <div id="greeter-message"></div>
+    </div>
+
+    <!-- ── Accessibility Preferences Screen ── -->
+    <div id="prefsScreen" role="form" aria-label="Accessibility Preferences">
+        <h2>ACCESSIBILITY PREFERENCES</h2>
+        <p class="prefs-subtitle">This system serves everyone. Tell us how you need it to work for you.</p>
+
+        <!-- Communication Mode -->
+        <div class="prefs-section">
+            <label id="commModeLabel">How do you prefer to receive information?</label>
+            <div class="prefs-hint">Choose your primary communication method</div>
+            <div class="prefs-radio-group" role="radiogroup" aria-labelledby="commModeLabel">
+                <label><input type="radio" name="commMode" value="read" checked><span>Read (Visual Text)</span></label>
+                <label><input type="radio" name="commMode" value="listen"><span>Listen (Audio / TTS)</span></label>
+                <label><input type="radio" name="commMode" value="braille"><span>Braille (Screen Reader)</span></label>
+            </div>
+        </div>
+
+        <!-- Sign Language -->
+        <div class="prefs-section">
+            <label for="prefSignLang">Sign Language</label>
+            <div class="prefs-hint">If you use sign language, select yours so we can adapt</div>
+            <select id="prefSignLang">
+                <option value="none">Not required</option>
+                <option value="asl">ASL (American Sign Language)</option>
+                <option value="bsl">BSL (British Sign Language)</option>
+                <option value="lsf">LSF (French Sign Language)</option>
+                <option value="lsq">LSQ (Quebec Sign Language)</option>
+                <option value="auslan">Auslan (Australian Sign Language)</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <!-- Preferred Language -->
+        <div class="prefs-section">
+            <label for="prefLanguage">Preferred Language</label>
+            <div class="prefs-hint">The language you are most comfortable with</div>
+            <select id="prefLanguage">
+                <option value="en">English</option>
+                <option value="fr">Français (French)</option>
+                <option value="es">Español (Spanish)</option>
+                <option value="pt">Português (Portuguese)</option>
+                <option value="de">Deutsch (German)</option>
+                <option value="it">Italiano (Italian)</option>
+                <option value="ar">العربية (Arabic)</option>
+                <option value="zh">中文 (Mandarin)</option>
+                <option value="hi">हिन्दी (Hindi)</option>
+                <option value="ja">日本語 (Japanese)</option>
+                <option value="ko">한국어 (Korean)</option>
+                <option value="ru">Русский (Russian)</option>
+                <option value="uk">Українська (Ukrainian)</option>
+                <option value="pl">Polski (Polish)</option>
+                <option value="nl">Nederlands (Dutch)</option>
+                <option value="sv">Svenska (Swedish)</option>
+                <option value="tl">Tagalog (Filipino)</option>
+                <option value="vi">Tiếng Việt (Vietnamese)</option>
+                <option value="th">ไทย (Thai)</option>
+                <option value="tr">Türkçe (Turkish)</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <!-- Country of Origin -->
+        <div class="prefs-section">
+            <label for="prefCountry">Country of Origin</label>
+            <div class="prefs-hint">Helps us respect your applicable laws and cultural context</div>
+            <input type="text" id="prefCountry" placeholder="e.g. Canada, United States, United Kingdom..." autocomplete="country-name">
+        </div>
+
+        <!-- Religious / Cultural Beliefs -->
+        <div class="prefs-section">
+            <label for="prefBeliefs">Religious or Cultural Beliefs</label>
+            <div class="prefs-hint">Optional — helps the system be culturally respectful</div>
+            <select id="prefBeliefs">
+                <option value="none">Prefer not to say</option>
+                <option value="christianity">Christianity</option>
+                <option value="islam">Islam</option>
+                <option value="judaism">Judaism</option>
+                <option value="hinduism">Hinduism</option>
+                <option value="buddhism">Buddhism</option>
+                <option value="sikhism">Sikhism</option>
+                <option value="indigenous">Indigenous Spirituality</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <!-- Applicable Law -->
+        <div class="prefs-section">
+            <label>Applicable Legal Frameworks</label>
+            <div class="prefs-hint">Select all that apply to you — governs how your data and rights are treated</div>
+            <div class="prefs-checkbox-group">
+                <label><input type="checkbox" name="prefLaw" value="gdpr"><span>GDPR (EU/UK)</span></label>
+                <label><input type="checkbox" name="prefLaw" value="pipeda"><span>PIPEDA (Canada)</span></label>
+                <label><input type="checkbox" name="prefLaw" value="aoda"><span>AODA (Ontario)</span></label>
+                <label><input type="checkbox" name="prefLaw" value="ada"><span>ADA (United States)</span></label>
+                <label><input type="checkbox" name="prefLaw" value="ccpa"><span>CCPA (California)</span></label>
+                <label><input type="checkbox" name="prefLaw" value="lgpd"><span>LGPD (Brazil)</span></label>
+                <label><input type="checkbox" name="prefLaw" value="popia"><span>POPIA (South Africa)</span></label>
+                <label><input type="checkbox" name="prefLaw" value="appi"><span>APPI (Japan)</span></label>
+                <label><input type="checkbox" name="prefLaw" value="pdpa"><span>PDPA (SE Asia)</span></label>
+                <label><input type="checkbox" name="prefLaw" value="other"><span>Other / Unknown</span></label>
+            </div>
+        </div>
+
+        <!-- Custom Notes -->
+        <div class="prefs-section">
+            <label for="prefNotes">Anything else the system should know?</label>
+            <div class="prefs-hint">Optional — any additional accommodations or context</div>
+            <input type="text" id="prefNotes" placeholder="e.g. color blind, motor impairment, large text needed...">
+        </div>
+
+        <button id="prefsEnterBtn" type="button">ENTER THE BOARDROOM</button>
+        <button class="prefs-skip" id="prefsSkipBtn" type="button">Skip — use defaults</button>
     </div>
 
     <div id="paywallOverlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);display:none;justify-content:center;align-items:center;">
@@ -653,6 +925,7 @@
     <script type="module">
         import { verifyAccess, isDemoMode, hasFullAccess } from "./AccessKey.js";
         import { bootBoardroom, privacySelfCheck } from "./boardroom.js";
+        import { savePrefs } from "./AccessibilityPrefs.js";
 
         const input = document.getElementById('accessKey');
         const launchBtn = document.getElementById('launchBtn');
@@ -660,8 +933,38 @@
         const paywallOverlay = document.getElementById('paywallOverlay');
         const paywallSponsorBtn = document.getElementById('paywallSponsorBtn');
         const paywallCloseBtn = document.getElementById('paywallCloseBtn');
+        const prefsEnterBtn = document.getElementById('prefsEnterBtn');
+        const prefsSkipBtn = document.getElementById('prefsSkipBtn');
 
         bootBoardroom();
+
+        // ── Collect preferences and enter boardroom ──
+        function collectAndLaunch() {
+            const commMode = document.querySelector('input[name="commMode"]:checked');
+            const laws = Array.from(document.querySelectorAll('input[name="prefLaw"]:checked')).map(el => el.value);
+
+            savePrefs({
+                communicationMode: commMode ? commMode.value : "read",
+                signLanguage: document.getElementById('prefSignLang').value,
+                preferredLanguage: document.getElementById('prefLanguage').value,
+                country: document.getElementById('prefCountry').value.trim(),
+                religiousBeliefs: document.getElementById('prefBeliefs').value,
+                applicableLaw: laws,
+                customNotes: document.getElementById('prefNotes').value.trim()
+            });
+
+            if (typeof window.__bozaLaunchBoardroom === "function") {
+                window.__bozaLaunchBoardroom();
+            }
+        }
+
+        prefsEnterBtn.addEventListener('click', collectAndLaunch);
+        prefsSkipBtn.addEventListener('click', function () {
+            savePrefs({});
+            if (typeof window.__bozaLaunchBoardroom === "function") {
+                window.__bozaLaunchBoardroom();
+            }
+        });
 
         const privacy = privacySelfCheck();
         if (privacy.status !== "ok") {
