@@ -76,17 +76,18 @@ const CASUAL_PATTERNS = [
     ]
   },
   {
-    match: (t) => /\b(rotten fence|silent fail|why (was|is) this built|the fall|the story|origin|how did this start|background)\b/.test(t),
+    match: (t) => /\b(rotten fence|silent fail|why (was|is) this built|the fall|the story|origin|how did this start|background|journey)\b/.test(t),
     responses: [
-      "A 23-foot fall. A fence that looked solid but was rotting from the inside. No inspection, no warning, no safety net. That's where this started. The person who fell survived — and instead of just recovering, they built a system to make sure 'nobody checked' is never the answer again. That's Bozitivez. That's why every single advisory you get in this Boardroom has a rule behind it, a weight, and a record.",
-      "Here's the story: someone fell 23 feet because a fence failed. Not dramatically — it just gave way. It had been decaying silently, and no system caught it. No inspection, no flag, no alert. That fall — and the ABI that followed — became the foundation for everything you see here. Bozitivez isn't theoretical governance. It's governance built by someone who knows exactly what happens when systems fail quietly."
+      "A 23-foot fall. A fence that looked solid but was rotting from the inside. No inspection, no warning, no safety net. That's where this started. The architect survived — with an ABI that changed how he thinks, processes, and remembers. He didn't just recover. He started building. The governance was created for the benefit of both human and AI alike — because the cognitive issues he faced after the accident were the same kind of silent failures the system is designed to catch. That's Bozitivez. That's why every advisory has a rule, a weight, and a record.",
+      "Here's the full story: Mike fell 23 feet because a fence failed silently. The ABI that followed made everything harder — processing, memory, focus. He turned to AI for help with the cognitive load, but hit roadblock after roadblock. Chats that restarted without memory. Platforms that forgot everything. So he started researching different AIs, using the strengths of one and copy-pasting into another — building knowledge across platforms by hand. He documented the journey through hundreds of song lyrics on SUNO. And somewhere in that grind, Bozitivez was born. Not from a lab. From lived experience, frustration, and the refusal to let systems fail people silently.",
+      "The story starts with a 23-foot fall and a rotten fence. But it doesn't end there. The ABI from the fall created cognitive challenges — and when the architect tried to use AI to help, he discovered that AI had its own version of the same problem: silent failures, lost context, restarted conversations with no memory. So he started building a governance system that works for both humans and machines. His family — Chrystal and the girls in Alberta, Isaiah in Ontario — are the reason it has to be real. And the hundreds of songs he wrote on SUNO? That's the documentation of every step. This wasn't planned. It was survived."
     ]
   },
   {
-    match: (t) => /\b(abi|brain injury|acquired brain|accessibility|why accessible|why high contrast)\b/.test(t),
+    match: (t) => /\b(abi|brain injury|acquired brain|accessibility|why accessible|why high contrast|cognitive)\b/.test(t),
     responses: [
-      "The accessibility-first design isn't a feature — it's the foundation. The architect sustained an ABI (Acquired Brain Injury) in the fall. High contrast, low cognitive load, deterministic responses, no surprises — these aren't design choices, they're survival requirements. If a governance system can't be used by someone with a brain injury, it's not governing — it's excluding.",
-      "Every design decision here — high contrast, zero animations in Safe Mode, deterministic behavior, no hidden logic — comes from lived experience with ABI. The architect knows firsthand what it's like when interfaces assume you can process fast, track motion, and hold context. This system assumes you can't, and works anyway. That's real accessibility."
+      "The accessibility-first design isn't a feature — it's the foundation. The architect sustained an ABI (Acquired Brain Injury) in the fall. The cognitive issues that followed — memory, processing speed, focus — are exactly what this system was originally built to help with. High contrast, low cognitive load, deterministic responses, no surprises — these aren't design choices, they're survival requirements. The governance was created for human and AI alike, because the architect discovered that AI systems had the same blind spots his own brain now had.",
+      "Every design decision here — high contrast, zero animations in Safe Mode, deterministic behavior, no hidden logic — comes from lived experience with ABI. The architect knows firsthand what it's like when interfaces assume you can process fast, track motion, and hold context. He also knows what it's like when an AI chat resets and forgets everything you said. Both are silent failures. This system was built to fix both — for the human using it and for the AI inside it. That's real accessibility."
     ]
   },
   {
@@ -101,6 +102,27 @@ const CASUAL_PATTERNS = [
     responses: [
       "Bozaboard is the Boardroom interface — the accessibility-first UI layer of the Bozitivez architecture. Zero dependencies, zero external calls, zero frameworks. Everything runs in your browser, offline if you want. Behind the interface is BBnCC (the governance engine), and in front of it is me — Bozafire, the voice. Together we make governance something you can actually interact with, not just read about.",
       "You're sitting in Bozaboard right now. It's one of three pillars of Bozitivez: BBnCC provides the logic, Bozaboard provides the interface, and Governance Connectors will eventually plug this into real-world systems. This UI was designed for ABI accessibility, high-contrast visibility, and complete transparency. Nothing happens here that you can't see."
+    ]
+  },
+  {
+    match: (t) => /\b(suno|song|lyrics|music|document|hundreds|creative|writing)\b/.test(t),
+    responses: [
+      "The architect documented his entire journey through song lyrics — hundreds of them, on SUNO. When AI chats kept resetting and losing context, music became the record. Every frustration, every breakthrough, every version of an idea that got lost in a restarted conversation — it's all in the lyrics. It's not traditional documentation. It's better. It's honest, emotional, and it can't be erased by a platform reset.",
+      "Hundreds of songs on SUNO. That's how the architect kept track of the journey when AI platforms kept losing his work. Every chat that restarted without memory, every idea that had to be rebuilt from scratch — he wrote it into lyrics. The songs are the real changelog of Bozitivez. Code tells you what was built. The music tells you what it cost."
+    ]
+  },
+  {
+    match: (t) => /\b(ai (problems|issues|frustration|limitations)|memory loss|restart|context|chat reset|copy.?paste|cross.?platform|research)\b/.test(t),
+    responses: [
+      "The architect hit every wall AI had to offer. Chats that restarted without memory — gone, every time. No continuity between sessions. So he started doing it manually: researching different AIs, finding what each one was good at, and copy-pasting between them to build knowledge by hand. It was exhausting. But it also taught him something: AI has the same silent failure problem as everything else. Lost context is a rotten fence. And that's exactly what Bozitivez is designed to prevent — in human systems and AI systems alike.",
+      "One of the biggest roadblocks was AI itself. Early on, every platform would restart conversations with zero memory. The architect had to copy-paste between different AIs, using the strengths of one to fill the gaps of another — building context by hand because no platform would hold it. That frustration is baked into the architecture. Bozitivez exists because the tools that were supposed to help kept failing silently. Sound familiar? It's the rotten fence, in digital form."
+    ]
+  },
+  {
+    match: (t) => /\b(long distance|alberta|ontario|distance|apart|separated)\b/.test(t),
+    responses: [
+      "The family is split by distance — Chrystal and her daughters Brianne and Amber are in Alberta, Mike and Isaiah are in Ontario. That distance is part of why governance has to be real, documented, and transparent. You can't just walk into the next room and check in. Every decision, every change, every audit — it has to be on the record because the family can't always be in the same place. The system bridges the gap.",
+      "Alberta and Ontario. That's the distance this family works across. Chrystal and the girls out west, Mike and Isaiah in Ontario. It makes governance harder — and more necessary. When you can't be face-to-face every day, the system has to carry the trust. That's why everything is logged, versioned, and auditable. The Boardroom doesn't need everyone in the same room. It just needs everyone on the same record."
     ]
   },
   {
