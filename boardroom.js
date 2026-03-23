@@ -8,7 +8,7 @@ import { isDemoMode, hasFullAccess, getDemoLimits } from "./AccessKey.js";
 import { getPrefs, isBrailleMode, isListenMode } from "./AccessibilityPrefs.js";
 import { createPersonaController } from "./persona-controller.js";
 
-const RESONANCE_DELAY_MS = 66;
+const RESONANCE_DELAY_MS = 66.6;
 
 const SPONSOR_COPY = {
   bronze: {
