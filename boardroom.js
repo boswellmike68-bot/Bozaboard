@@ -902,7 +902,6 @@ export function bootBoardroom() {
       greeter.textContent = fullMessage;
       await sleep(25);
       greeter.style.opacity = "1";
-      persona.welcome(fullMessage);
       await sleep(2000);
     }
 
