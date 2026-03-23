@@ -381,8 +381,7 @@ function createAdvisoryPortal({ safeModeGetter, orbController, personaController
     const result = wrapBBnCC(text);
 
     if (result.type === "casual") {
-      // Casual conversation — Bozafire talks, no governance animation
-      await append("boardroom", result.message, result.voice);
+      // Start speech immediately — voice reads as text types on screen
       if (personaController) {
         personaController.onAdvisory({
           persona: "Alignment Chair",
@@ -391,6 +390,7 @@ function createAdvisoryPortal({ safeModeGetter, orbController, personaController
           session: result.session
         });
       }
+      await append("boardroom", result.message, result.voice);
     } else {
       // Governance path — full engine response
       const isMomentumPositive = result.session &&
@@ -402,12 +402,12 @@ function createAdvisoryPortal({ safeModeGetter, orbController, personaController
       updateStatus(result.session);
 
       const prefix = result.checkpoint ? "[CHECKPOINT] " : "";
-      await append("boardroom", prefix + result.message, result.voice);
 
-      // Trigger persona face + voice
+      // Start speech immediately — voice reads as text types on screen
       if (personaController) {
         personaController.onAdvisory(result.raw);
       }
+      await append("boardroom", prefix + result.message, result.voice);
     }
   });
 
@@ -416,11 +416,15 @@ function createAdvisoryPortal({ safeModeGetter, orbController, personaController
   wrap.appendChild(input);
   wrap.appendChild(hint);
 
-  // Bozafire greeting on first view
+  // Bozafire greeting on first view — speak as it types
   setTimeout(async () => {
     if (!greeted) {
       greeted = true;
       const greeting = isDemoMode() ? getDemoGreeting() : getBozafireGreeting();
+      // Start speech immediately so voice reads as text types
+      if (personaController && personaController.voice && personaController.voice.getEnabled()) {
+        personaController.voice.speak(greeting, "Alignment Chair");
+      }
       await append("boardroom", greeting, "Bozafire");
     }
   }, 200);
