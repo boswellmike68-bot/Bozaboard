@@ -367,20 +367,34 @@ function createAdvisoryPortal({ safeModeGetter, orbController, personaController
 
     const result = wrapBBnCC(text);
 
-    const isMomentumPositive = result.session &&
-      (result.session.momentumTier === "positive" || result.session.momentumTier === "strong-positive");
-    if (!missionActive) {
-      orbController.setMissionActive(isMomentumPositive);
-    }
+    if (result.type === "casual") {
+      // Casual conversation — Bozafire talks, no governance animation
+      await append("boardroom", result.message, result.voice);
+      if (personaController) {
+        personaController.onAdvisory({
+          persona: "Alignment Chair",
+          type: "general",
+          message: result.message,
+          session: result.session
+        });
+      }
+    } else {
+      // Governance path — full engine response
+      const isMomentumPositive = result.session &&
+        (result.session.momentumTier === "positive" || result.session.momentumTier === "strong-positive");
+      if (!missionActive) {
+        orbController.setMissionActive(isMomentumPositive);
+      }
 
-    updateStatus(result.session);
+      updateStatus(result.session);
 
-    const prefix = result.checkpoint ? "[CHECKPOINT] " : "";
-    await append("boardroom", prefix + result.message, result.voice);
+      const prefix = result.checkpoint ? "[CHECKPOINT] " : "";
+      await append("boardroom", prefix + result.message, result.voice);
 
-    // Trigger persona face + voice
-    if (personaController) {
-      personaController.onAdvisory(result.raw);
+      // Trigger persona face + voice
+      if (personaController) {
+        personaController.onAdvisory(result.raw);
+      }
     }
   });
 
