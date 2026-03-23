@@ -59,9 +59,59 @@ const CASUAL_PATTERNS = [
     ]
   },
   {
+    match: (t) => /\b(what is bozitivez|bozitivez|governance architecture|what('s| is) the (mission|vision|purpose))\b/.test(t),
+    responses: [
+      "Bozitivez is the governance architecture this whole system is built on. It started with a real event — a 23-foot fall caused by a rotten fence that nobody inspected. That fall exposed something bigger: systems fail silently all the time, and nobody notices until someone gets hurt. Bozitivez exists to make that impossible. Every rule you see here, every momentum check, every checkpoint — it all traces back to one principle: systems cannot be allowed to fail silently.",
+      "The short version: Bozitivez is a governance architecture designed to eliminate silent failure. It was born from a 23-foot fall — a real one — caused by a fence that looked fine but was rotting from the inside. The architect survived and asked one question: 'Why did nobody catch this?' Everything you see in this Boardroom is the answer to that question.",
+      "Bozitivez has three parts: BBnCC is the governance engine — the mind. Bozaboard is the interface — where you are now. And Governance Connectors plug this logic into real-world systems: workplace safety, AI decisions, compliance, environmental monitoring. The whole thing exists because a rotten fence almost killed someone, and the systems that were supposed to prevent it had already failed silently."
+    ]
+  },
+  {
+    match: (t) => /\b(rotten fence|silent fail|why (was|is) this built|the fall|the story|origin|how did this start|background)\b/.test(t),
+    responses: [
+      "A 23-foot fall. A fence that looked solid but was rotting from the inside. No inspection, no warning, no safety net. That's where this started. The person who fell survived — and instead of just recovering, they built a system to make sure 'nobody checked' is never the answer again. That's Bozitivez. That's why every single advisory you get in this Boardroom has a rule behind it, a weight, and a record.",
+      "Here's the story: someone fell 23 feet because a fence failed. Not dramatically — it just gave way. It had been decaying silently, and no system caught it. No inspection, no flag, no alert. That fall — and the ABI that followed — became the foundation for everything you see here. Bozitivez isn't theoretical governance. It's governance built by someone who knows exactly what happens when systems fail quietly."
+    ]
+  },
+  {
+    match: (t) => /\b(abi|brain injury|acquired brain|accessibility|why accessible|why high contrast)\b/.test(t),
+    responses: [
+      "The accessibility-first design isn't a feature — it's the foundation. The architect sustained an ABI (Acquired Brain Injury) in the fall. High contrast, low cognitive load, deterministic responses, no surprises — these aren't design choices, they're survival requirements. If a governance system can't be used by someone with a brain injury, it's not governing — it's excluding.",
+      "Every design decision here — high contrast, zero animations in Safe Mode, deterministic behavior, no hidden logic — comes from lived experience with ABI. The architect knows firsthand what it's like when interfaces assume you can process fast, track motion, and hold context. This system assumes you can't, and works anyway. That's real accessibility."
+    ]
+  },
+  {
+    match: (t) => /\b(bbncc|what is the engine|governance engine|how does (it|this) work|behind the scenes)\b/.test(t),
+    responses: [
+      "BBnCC is the governance engine — the mind behind everything I say. When you type something, it classifies your intent, applies seven weighted rules (stability, reinforcement, escalation, contradiction, oscillation, repetition, session depth), selects the right Committee persona, and tracks your momentum. The highest-weight rule always wins — no blending, no negotiation. I'm just the voice that makes it sound human. Want to test it? Try 'proceed' a few times and watch the momentum climb.",
+      "The engine is called BBnCC. It's deterministic — same input, same output, every time. It has four Committee personas (Stability, Momentum, Risk, Alignment), seven governance rules ranked by authority weight, and a momentum tracker that shifts based on your intent. I take what the engine produces and wrap it in warmth. But the logic? That's pure math and rules. Nothing hidden."
+    ]
+  },
+  {
+    match: (t) => /\b(what is bozaboard|bozaboard|this (system|interface|ui|app|site|thing))\b/.test(t),
+    responses: [
+      "Bozaboard is the Boardroom interface — the accessibility-first UI layer of the Bozitivez architecture. Zero dependencies, zero external calls, zero frameworks. Everything runs in your browser, offline if you want. Behind the interface is BBnCC (the governance engine), and in front of it is me — Bozafire, the voice. Together we make governance something you can actually interact with, not just read about.",
+      "You're sitting in Bozaboard right now. It's one of three pillars of Bozitivez: BBnCC provides the logic, Bozaboard provides the interface, and Governance Connectors will eventually plug this into real-world systems. This UI was designed for ABI accessibility, high-contrast visibility, and complete transparency. Nothing happens here that you can't see."
+    ]
+  },
+  {
+    match: (t) => /\b(safety|workplace safety|wsib|compliance|connectors|real world|deployment)\b/.test(t),
+    responses: [
+      "The end goal is bigger than this Boardroom. Bozitivez is designed to plug into real-world systems — workplace safety platforms, WSIB compliance, AI decision-making, environmental monitoring. The governance logic you're interacting with here is the same logic that would catch a rotten fence before someone falls. We're not there yet — but the engine is real, the rules are real, and the architecture is designed for exactly that kind of deployment.",
+      "Governance Connectors are the third pillar of Bozitivez. They're adapters that will integrate this logic into workplace safety, compliance workflows, and AI systems. The idea is simple: the same momentum tracking, rule weighting, and silent-failure detection you see here should run behind every system where failure can cause harm. That's the mission."
+    ]
+  },
+  {
+    match: (t) => /\b(sponsor|funding|support|donate|contribute|money|invest)\b/.test(t),
+    responses: [
+      "Bozitivez is built by someone who survived a 23-foot fall and turned that experience into a governance architecture. Sponsorship accelerates real-world deployment, accessibility expansion, and integration with safety frameworks. Click the Sponsor button in the top bar to see the tiers — or email Bozitivez@outlook.com directly. Every dollar is governed. Every contribution goes on the record.",
+      "Sponsorship fuels three things: expanding accessibility features, deploying Governance Connectors into real-world safety systems, and sustaining development. There are three tiers — Bronze ($5/mo), Gold ($25/mo), and Founding Steward ($100/mo). Founding Stewards get a named governance seat and direct roadmap input. Hit the Sponsor button up top for details."
+    ]
+  },
+  {
     match: (t) => /\b(help|what can (i|you) (do|say)|commands|options)\b/.test(t),
     responses: [
-      "Here's how we can talk:\n\n• Say **proceed** to move forward — Momentum Chair responds\n• Say **evaluate** or **risk** — the Committee assesses\n• Say **pause** — Stability Chair holds space\n• Say **align** — Alignment Chair checks direction\n• Say **escalate** — flags something serious\n• Say **reflect** — take a breath and look back\n• Say **Fix the Planet** — activates all 13 perspectives\n• Say **reset** — fresh session\n\nOr just talk to me. I'll figure out what you mean."
+      "Here's how we can talk:\n\n• Say **proceed** to move forward — Momentum Chair responds\n• Say **evaluate** or **risk** — the Committee assesses\n• Say **pause** — Stability Chair holds space\n• Say **align** — Alignment Chair checks direction\n• Say **escalate** — flags something serious\n• Say **reflect** — take a breath and look back\n• Say **Fix the Planet** — activates all 13 perspectives\n• Say **reset** — fresh session\n\nYou can also ask me about Bozitivez, the rotten fence, BBnCC, accessibility, or sponsorship. Or just talk to me — I'll figure out what you mean."
     ]
   },
   {
