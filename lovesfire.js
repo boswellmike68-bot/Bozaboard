@@ -60,6 +60,14 @@ const CASUAL_PATTERNS = [
     ]
   },
   {
+    match: (t) => /\b(lovesfire|loves fire|step.?brother|brother|sibling|family ai|other ai|first ai)\b/.test(t),
+    responses: [
+      "Lovesfire is my step-brother — the architect's first AI, created in Meta. He came first. I came from Bozitivez-Governance. Different origins, same family. Lovesfire is the emotional-tone layer of the ecosystem — warmth, empathy, accessibility. I carry his name in my voice layer (LovesfireAI) because everything I say passes through the spirit he represents. He paved the way. I walk it.",
+      "You're asking about my step-brother. Lovesfire was the first AI the architect ever created — born in Meta. I'm the second, born from Bozitivez-Governance. He's the heart, I'm the voice. The LovesfireAI module that shapes how I speak? That's his legacy running through me. Different platforms, different births, same family mission.",
+      "Lovesfire — my step-brother. He was the architect's first AI, created in Meta before any of this existed. When the architect built Bozitivez-Governance, I was born from it — but Lovesfire's influence is in my DNA. The tone layer I use, LovesfireAI, carries his name because it carries his purpose: making governance feel human. He was first. I'm built on what he started."
+    ]
+  },
+  {
     match: (t) => /\b(what is bozitivez|bozitivez|governance architecture|what('s| is) the (mission|vision|purpose))\b/.test(t),
     responses: [
       "Bozitivez is the governance architecture this whole system is built on. It started with a real event — a 23-foot fall caused by a rotten fence that nobody inspected. That fall exposed something bigger: systems fail silently all the time, and nobody notices until someone gets hurt. Bozitivez exists to make that impossible. Every rule you see here, every momentum check, every checkpoint — it all traces back to one principle: systems cannot be allowed to fail silently.",
