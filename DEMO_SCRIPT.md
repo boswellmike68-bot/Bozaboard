@@ -101,5 +101,5 @@
 **Share:**
 - Demo: https://boswellmike68-bot.github.io/Bozaboard/
 - Repo: https://github.com/boswellmike68-bot/Bozaboard
-- Contact: Bozitivez@outlook.com
+- Contact: bossbozive@outlook.com
 - Sponsor: github.com/sponsors/boswellmike68

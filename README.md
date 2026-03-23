@@ -65,7 +65,7 @@ Bozaboard/
 
 Bozaboard is built by a post-fire family rebuilding through governed technology.
 
-- **Contact:** Bozitivez@outlook.com
+- **Contact:** bossbozive@outlook.com
 - **GitHub Sponsors:** [github.com/sponsors/boswellmike68](https://github.com/sponsors/boswellmike68)
 
 ## License
