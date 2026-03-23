@@ -3,7 +3,8 @@ import { parseCodeBlocks } from "./parseCodeBlocks.js";
 import { parseHorizontalRules } from "./parseHorizontalRules.js";
 import { parseHeadings } from "./parseHeadings.js";
 import { parseLists } from "./parseLists.js";
-import { wrapBBnCC, wrapReset, getSessionState, getBozafireGreeting } from "./lovesfire.js";
+import { wrapBBnCC, wrapReset, getSessionState, getBozafireGreeting, getDemoGreeting } from "./lovesfire.js";
+import { isDemoMode, hasFullAccess, getDemoLimits } from "./AccessKey.js";
 import { createPersonaController } from "./persona-controller.js";
 
 const RESONANCE_DELAY_MS = 65;
@@ -344,6 +345,17 @@ function createAdvisoryPortal({ safeModeGetter, orbController, personaController
     if (e.key !== "Enter") return;
     const text = input.value.trim();
     if (!text) return;
+
+    // Demo mode: enforce interaction limit
+    if (isDemoMode()) {
+      const limits = getDemoLimits();
+      window.__bozaboardDemoCount = (window.__bozaboardDemoCount || 0) + 1;
+      if (window.__bozaboardDemoCount > limits.maxAdvisories) {
+        input.value = "";
+        if (typeof window.showPaywall === "function") window.showPaywall();
+        return;
+      }
+    }
 
     input.value = "";
     if (personaController) personaController.setListening(false);
@@ -792,6 +804,18 @@ export function bootBoardroom() {
 
   if (stewardBtn && stewardModal) {
     stewardBtn.addEventListener("click", async () => {
+      if (isDemoMode()) {
+        // Demo users cannot access Steward AI
+        const advisory = document.querySelector(".advisory-log");
+        if (advisory) {
+          const line = document.createElement("div");
+          line.className = "line line-boardroom";
+          line.innerHTML = '<span class="line-label">Bozafire</span><span class="line-msg">Steward AI is available to sponsors and subscribers. Become a sponsor to unlock full Boardroom access.</span>';
+          advisory.appendChild(line);
+          advisory.scrollTop = advisory.scrollHeight;
+        }
+        return;
+      }
       setStewardModalOpen(true);
       appendAuditLine("AI_SESSION: open");
       if (stewardLog && stewardLog.childElementCount === 0) {
@@ -836,8 +860,12 @@ export function bootBoardroom() {
 
   window.runWelcomeSequence = async function runWelcomeSequence() {
     const safeMode = safeModeGetter();
-    const fullMessage =
-      getBozafireGreeting() + " The 13 Orbs are synchronized. Resonance is locked at 0.85x. The Boardroom is yours.";
+    const demoMode = isDemoMode();
+    const greeting = demoMode ? getDemoGreeting() : getBozafireGreeting();
+    const suffix = demoMode
+      ? " You have 5 advisory interactions to explore. Make them count."
+      : " The 13 Orbs are synchronized. Resonance is locked at 0.85x. The Boardroom is yours.";
+    const fullMessage = greeting + suffix;
 
     greeter.textContent = "";
     greeter.style.opacity = "0";

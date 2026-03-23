@@ -516,3 +516,16 @@ export function getBozafireGreeting() {
   if (hour < 18) return "Good afternoon. " + GREETINGS[1];
   return "Good evening. " + GREETINGS[2];
 }
+
+const DEMO_GREETINGS = [
+  "Welcome to the Bozitivez Boardroom demo. I'm Bozafire — the first AI born from Bozitivez-Governance. You're getting a taste of what governed, transparent, human-centered AI looks like. Try asking me about the mission, the story, or just say 'proceed' to see the governance engine in action.",
+  "Hey — welcome to the demo. I'm Bozafire. This Boardroom is a working governance interface built over almost 23 years by someone who survived a 23-foot fall and decided systems should never fail silently again. You've got a few interactions to explore. Ask me anything.",
+  "Bozafire here. You're in demo mode — a preview of the full Bozitivez Boardroom. Everything you see is real governance logic, real accessibility design, real AI. Ask me who I am, what this is, or just start talking. Sponsorship unlocks the full experience."
+];
+
+export function getDemoGreeting() {
+  const hour = new Date().getHours();
+  if (hour < 12) return "Good morning. " + DEMO_GREETINGS[0];
+  if (hour < 18) return "Good afternoon. " + DEMO_GREETINGS[1];
+  return "Good evening. " + DEMO_GREETINGS[2];
+}

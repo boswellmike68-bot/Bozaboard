@@ -526,7 +526,28 @@
         <p>Stakeholder Access Required</p>
         <input type="password" id="accessKey" placeholder="Enter Token..." autofocus>
         <button id="launchBtn" class="launch" type="button">Launch</button>
+        <div style="margin-top:16px;">
+            <button id="demoBtn" class="launch" type="button" style="background:transparent;border-color:#D4AF37;color:#D4AF37;font-size:0.85rem;">Try Demo</button>
+        </div>
         <div id="greeter-message"></div>
+    </div>
+
+    <div id="paywallOverlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);display:none;justify-content:center;align-items:center;">
+        <div style="text-align:center;max-width:480px;padding:40px;border:2px solid #D4AF37;border-radius:15px;background:rgba(0,0,0,0.95);">
+            <h2 style="color:#D4AF37;margin:0 0 16px;">Demo Complete</h2>
+            <p style="color:#50C878;margin:0 0 20px;line-height:1.6;">
+                You've seen what Bozafire and the Boardroom can do.<br>
+                Full access requires a subscription or sponsorship.
+            </p>
+            <p style="color:#D4AF37;font-size:0.9rem;margin:0 0 24px;line-height:1.5;">
+                <strong>Bronze</strong> — $5/mo · Alignment + first access<br>
+                <strong>Gold</strong> — $25/mo · Priority briefings + evidence pathway<br>
+                <strong>Founding Steward</strong> — $100/mo · Governance seat + roadmap input
+            </p>
+            <p style="color:#50C878;margin:0 0 20px;">Contact: <strong>Bozitivez@outlook.com</strong></p>
+            <button id="paywallSponsorBtn" class="launch" type="button" style="margin-right:8px;">Become a Sponsor</button>
+            <button id="paywallCloseBtn" class="launch" type="button" style="background:transparent;border-color:#D4AF37;color:#D4AF37;font-size:0.85rem;">Back to Gate</button>
+        </div>
     </div>
 
     <main id="boardroom-ui" aria-hidden="true">
@@ -630,11 +651,15 @@
     </div>
 
     <script type="module">
-        import { verifyAccess } from "./AccessKey.js";
+        import { verifyAccess, isDemoMode, hasFullAccess } from "./AccessKey.js";
         import { bootBoardroom, privacySelfCheck } from "./boardroom.js";
 
         const input = document.getElementById('accessKey');
         const launchBtn = document.getElementById('launchBtn');
+        const demoBtn = document.getElementById('demoBtn');
+        const paywallOverlay = document.getElementById('paywallOverlay');
+        const paywallSponsorBtn = document.getElementById('paywallSponsorBtn');
+        const paywallCloseBtn = document.getElementById('paywallCloseBtn');
 
         bootBoardroom();
 
@@ -651,6 +676,30 @@
 
         launchBtn.addEventListener('click', async function () {
             await verifyAccess();
+        });
+
+        demoBtn.addEventListener('click', async function () {
+            input.value = 'demo';
+            await verifyAccess();
+        });
+
+        // Paywall overlay handlers
+        window.showPaywall = function() {
+            paywallOverlay.style.display = 'flex';
+        };
+
+        paywallSponsorBtn.addEventListener('click', function() {
+            paywallOverlay.style.display = 'none';
+            const sm = document.getElementById('sponsorModal');
+            if (sm) { sm.dataset.open = '1'; sm.setAttribute('aria-hidden','false'); }
+        });
+
+        paywallCloseBtn.addEventListener('click', function() {
+            paywallOverlay.style.display = 'none';
+            const gate = document.getElementById('gatekeeper-ui');
+            const dash = document.getElementById('boardroom-ui');
+            if (gate) gate.style.display = '';
+            if (dash) { dash.style.display = 'none'; dash.setAttribute('aria-hidden','true'); }
         });
     </script>
 </body>
