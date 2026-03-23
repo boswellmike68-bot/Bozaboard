@@ -102,6 +102,34 @@ const CASUAL_PATTERNS = [
     ]
   },
   {
+    match: (t) => /\b(governance cycle|how (does|do) (changes|updates|decisions) (work|happen|get made)|decision (flow|process)|change process|proposal)\b/.test(t),
+    responses: [
+      "Every change to the system follows a governance cycle. Here's how it works:\n\n1. A proposal is submitted\n2. The Recorder logs it\n3. The Chair reviews it\n4. The Family Liaison confirms it aligns with wellbeing\n5. The Technical Assistant validates the structure\n6. The decision is logged in the audit record\n\nNothing changes without going through all six steps. That's what makes this system trustworthy — no silent updates, no backdoor changes.",
+      "Changes follow a strict cycle. Major changes (anything that touches the Core Document) require full governance review and a major version bump. Minor changes (Blueprint or Launch Protocol updates) go through weekly approval. Patches (typos, structure fixes) just need the Recorder's sign-off. Every single change is logged. The system literally cannot evolve without a paper trail."
+    ]
+  },
+  {
+    match: (t) => /\b(roles|who (runs|governs|manages|controls)|chair|recorder|liaison|team|family|isaiah|chrystal|mike)\b/.test(t),
+    responses: [
+      "The governance has four roles:\n\n• **Chair (Mike)** — final decision authority on all changes\n• **Recorder (Isaiah)** — maintains logs, meeting notes, and the audit trail\n• **Family Liaison (Chrystal)** — ensures every decision aligns with family wellbeing\n• **Technical Assistant** — supports clarity, structure, and reproducibility\n\nThis isn't a corporation. It's a family governance structure. Every role exists to make sure the system stays honest, documented, and human-centered.",
+      "Four roles govern this system. Mike is the Chair — he has final authority. Isaiah is the Recorder — he keeps the logs and audit trail. Chrystal is the Family Liaison — she makes sure every decision serves the family's wellbeing, not just the technology. And there's a Technical Assistant for structure and reproducibility. It's governance by people who actually live with the consequences of their decisions."
+    ]
+  },
+  {
+    match: (t) => /\b(governance rhythm|weekly|monthly|quarterly|review cycle|audit log|how often|cadence|schedule)\b/.test(t),
+    responses: [
+      "The governance runs on three rhythms:\n\n**Weekly:** Review the audit log, validate the reproducibility harness, confirm no drift events, approve or reject proposed changes.\n\n**Monthly:** Review Blueprint alignment, validate Launch Protocol readiness, update the scenario library.\n\n**Quarterly:** Review the Core Document itself, evaluate doctrine alignment, approve any major version changes.\n\nNothing drifts. Nothing decays silently. The whole point is that someone is always checking.",
+      "Three cycles, three speeds. Weekly reviews catch drift and approve changes. Monthly reviews check that the Blueprint and Launch Protocol still align. Quarterly reviews go all the way to the Core Document — the foundation. It's like the rotten fence problem, but for governance itself: if you don't inspect regularly, things decay without anyone noticing."
+    ]
+  },
+  {
+    match: (t) => /\b(version|major change|minor change|patch|drift|audit|reproducib)\b/.test(t),
+    responses: [
+      "Changes are categorized by impact:\n\n• **Major** — alters the Core Document. Full governance review. Major version bump.\n• **Minor** — updates Blueprint or Launch Protocol. Weekly cycle approval. Minor version bump.\n• **Patch** — fixes typos, structure, or harness details. Recorder approval only. Patch version bump.\n\nEvery change, no matter how small, gets a version increment and an audit log entry. Drift detection runs continuously to make sure the system stays aligned with the Core Document. If it drifts, it gets flagged — automatically.",
+      "The system uses semantic versioning tied to governance authority. A patch is a typo fix — the Recorder can approve it. A minor change updates the Blueprint or Protocol — needs weekly approval. A major change touches the Core Document — full governance review, all four roles involved. And drift detection runs on top of everything to catch anything that slips through. Nothing changes silently. That's the whole point."
+    ]
+  },
+  {
     match: (t) => /\b(sponsor|funding|support|donate|contribute|money|invest)\b/.test(t),
     responses: [
       "Bozitivez is built by someone who survived a 23-foot fall and turned that experience into a governance architecture. Sponsorship accelerates real-world deployment, accessibility expansion, and integration with safety frameworks. Click the Sponsor button in the top bar to see the tiers — or email Bozitivez@outlook.com directly. Every dollar is governed. Every contribution goes on the record.",
