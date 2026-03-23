@@ -343,6 +343,22 @@ function applyTone(advisory, inputText) {
   const s = seed(inputText);
   const type = advisory.checkpoint ? "checkpoint" : (advisory.type || "general");
 
+  // Special handling for unrecognized input — echo what they said and help
+  if (type === "general") {
+    const trimmed = inputText.trim();
+    const quoted = trimmed.length > 60 ? trimmed.substring(0, 57) + "..." : trimmed;
+    const suggestions = [
+      `I heard "${quoted}" but I'm not sure what governance action you're looking for. Here's what I can work with:\n\n• "proceed" or "let's move forward" — to advance\n• "evaluate this" or "assess" — to review\n• "there's a risk" or "I see a problem" — to flag danger\n• "pause" or "hold on" — to stop and think\n• "align" or "does this fit?" — to check direction\n• "escalate" — to flag something urgent\n• "reflect" — to look back\n\nYou can also ask me about Bozitivez, the story behind this, or just say hi. I'll figure it out.`,
+      `You said "${quoted}" — I want to help but I didn't catch a governance intent in that. The Committee responds to actions like:\n\n• Moving forward → say "proceed"\n• Checking something → say "evaluate" or "risk"\n• Slowing down → say "pause"\n• Checking alignment → say "align"\n• Something urgent → say "escalate"\n\nOr try asking me a question — like "what is Bozitivez?" or "how does this work?" and I'll talk you through it.`,
+      `"${quoted}" — got it, but the governance engine didn't find an action in that. No worries. Try rephrasing with an intent, like:\n\n• "I want to proceed" → forward motion\n• "evaluate the risk" → assessment\n• "let's pause" → hold position\n• "check alignment" → values check\n\nOr just talk to me naturally — ask about the mission, the story, or say how you're feeling. I'm more than keywords.`
+    ];
+    return {
+      message: pick(suggestions, s),
+      voice: "Bozafire",
+      raw: advisory
+    };
+  }
+
   const openers = TONE_OPENERS[type] || TONE_OPENERS.general;
   const opener = pick(openers, s);
 
