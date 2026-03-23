@@ -327,7 +327,7 @@ const TONE_OPENERS = {
   reflection: ["Worth sitting with — ", "Good moment to breathe — ", "Looking back — "],
   escalation: ["This needs attention — ", "Flagging — ", "Let's take this seriously — "],
   pause:      ["Holding space — ", "Rest is governance — ", "Steady — ", "Breathing room — "],
-  general:    ["Heard you — ", "With you — ", "I'm tracking — ", "Copy — "],
+  general:    ["I hear you — ", "Still with you — ", "I'm tracking, and ", "No worries — "],
   checkpoint: ["Milestone — ", "Check-in time — ", "Let's see where we are — "]
 };
 

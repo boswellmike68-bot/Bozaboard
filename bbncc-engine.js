@@ -75,7 +75,7 @@ const PATTERNS = {
   reflection: "Reflection noted. The Committee advises capturing insights before proceeding.",
   escalation: "Escalation detected. The Committee advises assessing severity and required response level.",
   pause: "Pause acknowledged. The Committee advises holding position until clarity returns.",
-  general: "Intent acknowledged. The Committee advises continuing when clarity is established."
+  general: "The Committee is listening. Try telling us what you want to do — move forward, evaluate something, flag a risk, or take a pause."
 };
 
 function advisoryFor(type) {
