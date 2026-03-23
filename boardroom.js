@@ -3,7 +3,7 @@ import { parseCodeBlocks } from "./parseCodeBlocks.js";
 import { parseHorizontalRules } from "./parseHorizontalRules.js";
 import { parseHeadings } from "./parseHeadings.js";
 import { parseLists } from "./parseLists.js";
-import { wrapBBnCC, wrapReset, getSessionState, getBozafireGreeting, getDemoGreeting } from "./lovesfire.js";
+import { wrapBBnCC, wrapReset, getSessionState, getBozafireGreeting, getDemoGreeting, DEMO_TOUR } from "./lovesfire.js";
 import { isDemoMode, hasFullAccess, getDemoLimits } from "./AccessKey.js";
 import { createPersonaController } from "./persona-controller.js";
 
@@ -415,12 +415,32 @@ function createAdvisoryPortal({ safeModeGetter, orbController, personaController
   wrap.appendChild(input);
   wrap.appendChild(hint);
 
-  // Bozafire greeting on first view
+  // Bozafire greeting on first view — or full guided tour in demo mode
   setTimeout(async () => {
     if (!greeted) {
       greeted = true;
-      const greeting = getBozafireGreeting();
-      await append("boardroom", greeting, "Bozafire");
+
+      if (isDemoMode() && DEMO_TOUR && DEMO_TOUR.length > 0) {
+        // Guided tour: disable input, auto-play all steps
+        input.disabled = true;
+        input.placeholder = "Tour in progress — sit back and let Bozafire talk…";
+
+        for (let i = 0; i < DEMO_TOUR.length; i++) {
+          const step = DEMO_TOUR[i];
+          await append("boardroom", step.text, step.label);
+          // Pause between steps (longer for first, shorter as it builds)
+          if (i < DEMO_TOUR.length - 1) {
+            await new Promise(r => setTimeout(r, 4500));
+          }
+        }
+
+        // Tour complete — show paywall after a brief pause
+        await new Promise(r => setTimeout(r, 2000));
+        if (typeof window.showPaywall === "function") window.showPaywall();
+      } else {
+        const greeting = getBozafireGreeting();
+        await append("boardroom", greeting, "Bozafire");
+      }
     }
   }, 200);
 
@@ -863,7 +883,7 @@ export function bootBoardroom() {
     const demoMode = isDemoMode();
     const greeting = demoMode ? getDemoGreeting() : getBozafireGreeting();
     const suffix = demoMode
-      ? " You have 5 advisory interactions to explore. Make them count."
+      ? " Bozafire will guide you through the full experience. Sit back."
       : " The 13 Orbs are synchronized. Resonance is locked at 0.85x. The Boardroom is yours.";
     const fullMessage = greeting + suffix;
 
@@ -886,6 +906,12 @@ export function bootBoardroom() {
     if (dashboard) {
       dashboard.style.display = "block";
       dashboard.setAttribute("aria-hidden", "false");
+    }
+
+    // Demo mode: auto-navigate to advisory portal for guided tour
+    if (demoMode) {
+      await sleep(1500);
+      setActivePillar("advisory");
     }
   };
 }
