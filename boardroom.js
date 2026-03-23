@@ -415,32 +415,12 @@ function createAdvisoryPortal({ safeModeGetter, orbController, personaController
   wrap.appendChild(input);
   wrap.appendChild(hint);
 
-  // Bozafire greeting on first view — or full guided tour in demo mode
+  // Bozafire greeting on first view
   setTimeout(async () => {
     if (!greeted) {
       greeted = true;
-
-      if (isDemoMode() && DEMO_TOUR && DEMO_TOUR.length > 0) {
-        // Guided tour: disable input, auto-play all steps
-        input.disabled = true;
-        input.placeholder = "Tour in progress — sit back and let Bozafire talk…";
-
-        for (let i = 0; i < DEMO_TOUR.length; i++) {
-          const step = DEMO_TOUR[i];
-          await append("boardroom", step.text, step.label);
-          // Pause between steps (longer for first, shorter as it builds)
-          if (i < DEMO_TOUR.length - 1) {
-            await new Promise(r => setTimeout(r, 4500));
-          }
-        }
-
-        // Tour complete — show paywall after a brief pause
-        await new Promise(r => setTimeout(r, 2000));
-        if (typeof window.showPaywall === "function") window.showPaywall();
-      } else {
-        const greeting = getBozafireGreeting();
-        await append("boardroom", greeting, "Bozafire");
-      }
+      const greeting = isDemoMode() ? getDemoGreeting() : getBozafireGreeting();
+      await append("boardroom", greeting, "Bozafire");
     }
   }, 200);
 
