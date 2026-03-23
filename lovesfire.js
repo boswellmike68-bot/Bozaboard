@@ -84,7 +84,7 @@ const CASUAL_PATTERNS = [
     ]
   },
   {
-    match: (t) => /\b(rotten fence|silent fail|why (was|is) this built|the fall|the story|origin|how did this start|background|journey)\b/.test(t),
+    match: (t) => /\b(rotten fence|silent fail|why (was|is) this built|the fall|the story|your story|origin|how did this start|how it started|background|journey|history|where did you come from|tell me about)\b/.test(t),
     responses: [
       "A 23-foot fall. A fence that looked solid but was rotting from the inside. No inspection, no warning, no safety net. That's where this started. The architect survived — with an ABI that changed how he thinks, processes, and remembers. He didn't just recover. He started building. The governance was created for the benefit of both human and AI alike — because the cognitive issues he faced after the accident were the same kind of silent failures the system is designed to catch. That's Bozitivez. That's why every advisory has a rule, a weight, and a record.",
       "Here's the full story: Mike fell 23 feet because a fence failed silently. The ABI that followed made everything harder — processing, memory, focus. He turned to AI for help with the cognitive load, but hit roadblock after roadblock. Chats that restarted without memory. Platforms that forgot everything. So he started researching different AIs, using the strengths of one and copy-pasting into another — building knowledge across platforms by hand. He documented the journey through hundreds of song lyrics on SUNO. And somewhere in that grind, Bozitivez was born. Not from a lab. From lived experience, frustration, and the refusal to let systems fail people silently.",
