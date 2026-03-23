@@ -3,7 +3,8 @@ import { parseCodeBlocks } from "./parseCodeBlocks.js";
 import { parseHorizontalRules } from "./parseHorizontalRules.js";
 import { parseHeadings } from "./parseHeadings.js";
 import { parseLists } from "./parseLists.js";
-import { generateAdvisory, resetSession, getSessionState } from "./bbncc-engine.js";
+import { wrapBBnCC, wrapReset, getSessionState, getBozafireGreeting } from "./lovesfire.js";
+import { createPersonaController } from "./persona-controller.js";
 
 const RESONANCE_DELAY_MS = 65;
 
@@ -279,12 +280,14 @@ function pillarSpec() {
   ];
 }
 
-function createAdvisoryPortal({ safeModeGetter, orbController }) {
+function createAdvisoryPortal({ safeModeGetter, orbController, personaController }) {
   const wrap = document.createElement("div");
   wrap.className = "advisory";
 
   const log = document.createElement("div");
   log.className = "advisory-log";
+
+  let greeted = false;
 
   const status = document.createElement("div");
   status.className = "advisory-hint";
@@ -293,7 +296,7 @@ function createAdvisoryPortal({ safeModeGetter, orbController }) {
   const input = document.createElement("input");
   input.className = "advisory-input";
   input.type = "text";
-  input.placeholder = "Speak to the Committee… (try: proceed, evaluate risk, pause, align, escalate, reflect)";
+  input.placeholder = "Speak to Bozafire… (try: proceed, evaluate risk, pause, align, escalate, reflect)";
 
   const hint = document.createElement("div");
   hint.className = "advisory-hint";
@@ -329,48 +332,71 @@ function createAdvisoryPortal({ safeModeGetter, orbController }) {
     await typeInto(msg, text, { safeMode: safeModeGetter() });
   }
 
+  input.addEventListener("focus", () => {
+    if (personaController) personaController.setListening(true);
+  });
+
+  input.addEventListener("blur", () => {
+    if (personaController) personaController.setListening(false);
+  });
+
   input.addEventListener("keydown", async (e) => {
     if (e.key !== "Enter") return;
     const text = input.value.trim();
     if (!text) return;
 
     input.value = "";
+    if (personaController) personaController.setListening(false);
     await append("steward", text);
 
     const lower = text.toLowerCase();
 
     if (lower === "reset" || lower === "reset session") {
-      const result = resetSession();
+      const result = wrapReset();
       orbController.setMissionActive(false);
-      updateStatus({ momentumTier: "neutral", momentum: 0, turns: 0 });
-      await append("boardroom", result.status, "Alignment Chair");
+      updateStatus(result.session);
+      await append("boardroom", result.message, result.voice);
       return;
     }
 
     const missionActive = lower.includes("fix the planet");
     if (missionActive) {
       orbController.setMissionActive(true);
-      await append("boardroom", "Mission acknowledged: Fix the Planet. Consensus ring synchronized. All 13 perspectives active.", "Alignment Chair");
+      await append("boardroom", "Mission acknowledged: Fix the Planet. Consensus ring synchronized. All 13 perspectives active.", "Bozafire · Alignment");
     }
 
-    const advisory = generateAdvisory(text);
+    const result = wrapBBnCC(text);
 
-    const isMomentumPositive = advisory.session &&
-      (advisory.session.momentumTier === "positive" || advisory.session.momentumTier === "strong-positive");
+    const isMomentumPositive = result.session &&
+      (result.session.momentumTier === "positive" || result.session.momentumTier === "strong-positive");
     if (!missionActive) {
       orbController.setMissionActive(isMomentumPositive);
     }
 
-    updateStatus(advisory.session);
+    updateStatus(result.session);
 
-    const prefix = advisory.checkpoint ? "[CHECKPOINT] " : "";
-    await append("boardroom", prefix + advisory.message, advisory.persona);
+    const prefix = result.checkpoint ? "[CHECKPOINT] " : "";
+    await append("boardroom", prefix + result.message, result.voice);
+
+    // Trigger persona face + voice
+    if (personaController) {
+      personaController.onAdvisory(result.raw);
+    }
   });
 
   wrap.appendChild(log);
   wrap.appendChild(status);
   wrap.appendChild(input);
   wrap.appendChild(hint);
+
+  // Bozafire greeting on first view
+  setTimeout(async () => {
+    if (!greeted) {
+      greeted = true;
+      const greeting = getBozafireGreeting();
+      await append("boardroom", greeting, "Bozafire");
+    }
+  }, 200);
 
   return wrap;
 }
@@ -599,6 +625,27 @@ export function bootBoardroom() {
       }, 1200);
     }
   }
+  // ── Persona Controller ──
+  const persona = createPersonaController({ avatarSize: 130, safeMode: getSafeMode() });
+  const personaMount = document.getElementById("personaMount");
+  if (personaMount) {
+    personaMount.insertBefore(persona.avatar.el, personaMount.firstChild);
+  }
+
+  // ── Voice Toggle ──
+  const voiceBtn = document.getElementById("voiceBtn");
+  if (voiceBtn) {
+    const initVoice = persona.getVoiceEnabled();
+    voiceBtn.textContent = initVoice ? "Voice: ON" : "Voice: OFF";
+    voiceBtn.dataset.active = initVoice ? "1" : "0";
+
+    voiceBtn.addEventListener("click", () => {
+      const nowOn = persona.toggleVoice();
+      voiceBtn.textContent = nowOn ? "Voice: ON" : "Voice: OFF";
+      voiceBtn.dataset.active = nowOn ? "1" : "0";
+    });
+  }
+
   const safeModeState = getSafeMode();
   setSafeMode(safeModeState);
   safeModeBtn.textContent = safeModeState ? "Safe Mode: ON" : "Safe Mode: OFF";
@@ -607,6 +654,7 @@ export function bootBoardroom() {
     const next = !getSafeMode();
     setSafeMode(next);
     safeModeBtn.textContent = next ? "Safe Mode: ON" : "Safe Mode: OFF";
+    persona.setSafeMode(next);
   });
 
   if (sponsorBtn && sponsorModal) {
@@ -706,7 +754,7 @@ export function bootBoardroom() {
 
     if (spec.id === "advisory") {
       pillarBody.appendChild(
-        createAdvisoryPortal({ safeModeGetter, orbController })
+        createAdvisoryPortal({ safeModeGetter, orbController, personaController: persona })
       );
       return;
     }
@@ -775,7 +823,7 @@ export function bootBoardroom() {
   window.runWelcomeSequence = async function runWelcomeSequence() {
     const safeMode = safeModeGetter();
     const fullMessage =
-      "Welcome, Steward. The 13 Orbs are synchronized. Resonance is locked at 0.85x. The Boardroom is yours.";
+      getBozafireGreeting() + " The 13 Orbs are synchronized. Resonance is locked at 0.85x. The Boardroom is yours.";
 
     greeter.textContent = "";
     greeter.style.opacity = "0";
@@ -788,6 +836,7 @@ export function bootBoardroom() {
       greeter.textContent = fullMessage;
       await sleep(25);
       greeter.style.opacity = "1";
+      persona.welcome(fullMessage);
       await sleep(2000);
     }
 

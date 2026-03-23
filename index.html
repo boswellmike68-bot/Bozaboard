@@ -473,6 +473,50 @@
             color: #50C878;
             opacity: 1;
         }
+
+        /* ── Persona Avatar (centered in orb ring) ── */
+        #personaMount {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        #personaMount svg {
+            pointer-events: auto;
+        }
+
+        #personaLabel {
+            text-align: center;
+            margin-top: 4px;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            color: rgba(80,200,120,0.85);
+            pointer-events: none;
+        }
+
+        .voice-btn {
+            background: transparent;
+            border: 1px solid rgba(212,175,55,0.55);
+            color: rgba(212,175,55,0.95);
+            padding: 10px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: border-color 200ms, color 200ms;
+        }
+
+        .voice-btn[data-active="1"] {
+            border-color: rgba(80,200,120,0.75);
+            color: rgba(80,200,120,0.95);
+        }
+
+        body[data-safe-mode="1"] #personaMount svg * {
+            animation: none !important;
+            transition: none !important;
+        }
     </style>
 </head>
 <body>
@@ -492,6 +536,7 @@
                 <span>Sector Alpha (The Field) · Command Center (Main Office)</span>
             </div>
             <div class="topbar-actions">
+                <button id="voiceBtn" class="voice-btn" type="button" data-active="1" aria-label="Toggle voice">Voice: ON</button>
                 <button id="sponsorBtn" class="safe" type="button">Sponsor</button>
                 <button id="stewardBtn" class="safe" type="button">Steward AI</button>
                 <button id="safeModeBtn" class="safe" type="button">Safe Mode: OFF</button>
@@ -502,6 +547,9 @@
             <aside class="left">
                 <div id="orbRingMount">
                     <div id="orbTooltip" class="orb-tooltip" data-visible="0"></div>
+                    <div id="personaMount">
+                        <div id="personaLabel">STEWARD</div>
+                    </div>
                 </div>
                 <nav id="pillarNav" aria-label="Boardroom pillars"></nav>
             </aside>
