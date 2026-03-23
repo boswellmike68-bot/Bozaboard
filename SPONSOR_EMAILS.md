@@ -23,7 +23,7 @@ Would you be open to a 10-minute walkthrough?
 
 Best,
 Mike Boswell
-bossbozive@outlook.com
+bossbozitive@outlook.com
 
 ---
 
@@ -89,7 +89,7 @@ Token: steward → Advisory Portal → type "proceed"
 Happy to answer any questions.
 
 — Mike
-bossbozive@outlook.com
+bossbozitive@outlook.com
 
 ---
 

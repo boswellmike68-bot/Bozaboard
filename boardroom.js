@@ -14,7 +14,7 @@ const SPONSOR_COPY = {
   bronze: {
     label: "Bronze",
     copyLabel: "Copy Steward Contact Email",
-    value: "bossbozive@outlook.com"
+    value: "bossbozitive@outlook.com"
   },
   gold: {
     label: "Gold",
@@ -24,7 +24,7 @@ const SPONSOR_COPY = {
   founding: {
     label: "Founding Steward",
     copyLabel: "Copy Founding Steward Handle",
-    value: "bossbozive@outlook.com"
+    value: "bossbozitive@outlook.com"
   }
 };
 

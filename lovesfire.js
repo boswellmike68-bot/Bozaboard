@@ -180,7 +180,7 @@ const CASUAL_PATTERNS = [
   {
     match: (t) => /\b(sponsor|funding|support|donate|contribute|money|invest)\b/.test(t),
     responses: [
-      "Bozitivez is built by someone who survived a 23-foot fall and turned that experience into a governance architecture. Sponsorship accelerates real-world deployment, accessibility expansion, and integration with safety frameworks. Click the Sponsor button in the top bar to see the tiers — or email bossbozive@outlook.com directly. Every dollar is governed. Every contribution goes on the record.",
+      "Bozitivez is built by someone who survived a 23-foot fall and turned that experience into a governance architecture. Sponsorship accelerates real-world deployment, accessibility expansion, and integration with safety frameworks. Click the Sponsor button in the top bar to see the tiers — or email bossbozitive@outlook.com directly. Every dollar is governed. Every contribution goes on the record.",
       "Sponsorship fuels three things: expanding accessibility features, deploying Governance Connectors into real-world safety systems, and sustaining development. There are three tiers — Bronze ($5/mo), Gold ($25/mo), and Founding Steward ($100/mo). Founding Stewards get a named governance seat and direct roadmap input. Hit the Sponsor button up top for details."
     ]
   },
@@ -595,6 +595,6 @@ export const DEMO_TOUR = [
   },
   {
     label: "Bozafire · The Ask",
-    text: "What you're looking at needs sponsorship to reach the people it was built for. Bronze, Gold, or Founding Steward — every tier puts fuel behind governance that's transparent, accessible, and human-centered. If what you've seen here matters to you, reach out: bossbozive@outlook.com. This is the floor. Help us build the ceiling."
+    text: "What you're looking at needs sponsorship to reach the people it was built for. Bronze, Gold, or Founding Steward — every tier puts fuel behind governance that's transparent, accessible, and human-centered. If what you've seen here matters to you, reach out: bossbozitive@outlook.com. This is the floor. Help us build the ceiling."
   }
 ];

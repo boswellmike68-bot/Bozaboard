@@ -44,7 +44,7 @@ This isn't theoretical governance. It's governance born from necessity.
 ### Bronze — $5/month
 - Name in Steward Credits
 - Early access to governance updates
-- Direct contact: bossbozive@outlook.com
+- Direct contact: bossbozitive@outlook.com
 
 ### Gold — $25/month
 - Everything in Bronze
@@ -88,5 +88,5 @@ We're seeking **3-5 founding sponsors** to sustain development through the next 
 
 ---
 
-Contact: bossbozive@outlook.com
+Contact: bossbozitive@outlook.com
 GitHub: github.com/boswellmike68-bot/Bozaboard
