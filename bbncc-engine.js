@@ -5,22 +5,28 @@
 // ── Intent Classifier ──────────────────────────────────────────────
 // Highest-specificity match wins. Order matters.
 
+// Fluid intent map — human-proof keyword variations for each governance intent
+const INTENT_MAP = {
+  escalation: ["escalate", "escalation", "urgent", "emergency", "critical", "severe"],
+  alignment:  ["align", "alignment", "does this fit", "check alignment", "on track", "in line"],
+  priority:   ["prioritize", "priority", "rank", "what comes first", "most important"],
+  reflection: ["reflect", "reflection", "look back", "review", "hindsight", "recap"],
+  proceed:    ["proceed", "move forward", "moveforward", "lets move", "let's move", "go ahead", "continue", "next", "advance"],
+  pause:      ["pause", "hold", "wait", "stop", "slow down", "take a breath", "hold on"],
+  evaluation: ["evaluate", "evaluation", "assess", "measure", "analyze", "weigh"],
+  risk:       ["risk", "problem", "danger", "threat", "hazard", "concern", "exposure"],
+  uncertainty:["uncertain", "unsure", "confused", "don't know", "not sure", "unclear"],
+  scope:      ["scope", "boundary", "boundaries", "deliverable", "what's included"]
+};
+
 export function classifyIntent(input) {
-  const text = String(input).toLowerCase();
+  const text = String(input).toLowerCase().trim();
 
-  if (text.includes("escalate") || text.includes("escalation")) return "escalation";
-  if (text.includes("align") || text.includes("alignment")) return "alignment";
-  if (text.includes("prioritize") || text.includes("priority")) return "priority";
-  if (text.includes("reflect") || text.includes("reflection")) return "reflection";
-
-  if (text.includes("proceed")) return "proceed";
-  if (text.includes("pause") || text.includes("hold")) return "pause";
-  if (text.includes("evaluate") || text.includes("evaluation")) return "evaluation";
-
-  if (text.includes("risk")) return "risk";
-  if (text.includes("uncertain") || text.includes("unsure")) return "uncertainty";
-
-  if (text.includes("scope")) return "scope";
+  for (const [intent, keywords] of Object.entries(INTENT_MAP)) {
+    if (keywords.some(k => text.includes(k))) {
+      return intent;
+    }
+  }
 
   return "general";
 }

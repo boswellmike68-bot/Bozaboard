@@ -263,6 +263,14 @@ const CASUAL_PATTERNS = [
       parts.push("What do you want to do next?");
       return parts.join(" ");
     }
+  },
+  {
+    match: (t) => /\b(who|what|tell me|explain|describe|how come|why is)\b/.test(t),
+    responses: [
+      "That's a valid inquiry. I'll record it for the Committee to review during the next 'reflect' session. In the meantime — try asking about Bozitivez, the rotten fence, BBnCC, accessibility, or any of the governance roles. I know more than you might expect.",
+      "Good question. I don't have a specific answer mapped for that one yet, but the Committee is listening. Try being more specific — ask about the origin story, the family, the engine, or how governance works here.",
+      "Noted. The Boardroom logs every inquiry. If you're looking for something specific, try asking about the architect, the fall, accessibility, sponsorship, or how this system was built. I'll meet you there."
+    ]
   }
 ];
 
