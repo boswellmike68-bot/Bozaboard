@@ -920,6 +920,7 @@ export function bootBoardroom() {
 }
 
 export function privacySelfCheck() {
+  // POLISHED PRIVACY: Ensure all outbound data paths (Copy/Export/Log) are filtered through this masking logic before deployment.
   const banned = [
     "blenheim",
     "tilbury",

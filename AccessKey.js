@@ -1,3 +1,7 @@
+/*
+   PROTOTYPE ARCHITECTURE: This is a Phase 1 Client-Side Demo Gateway for demonstration and tiered-access visualization. Production-grade server-side validation is slated for Phase 2.
+ */
+
 // ── Access Tiers ─────────────────────────────────────────────────
 // owner    = Mike only. Unlimited. No restrictions.
 // sponsor  = Paid subscriber or sponsor. Full access.
