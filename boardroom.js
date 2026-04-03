@@ -7,6 +7,7 @@ import { wrapBBnCC, wrapReset, getSessionState, getBozafireGreeting, getDemoGree
 import { isDemoMode, hasFullAccess, getDemoLimits } from "./AccessKey.js";
 import { getPrefs, isBrailleMode, isListenMode } from "./AccessibilityPrefs.js";
 import { createPersonaController } from "./persona-controller.js";
+import { sendToLovesfire, pollJobStatus } from "./lovesfire-bridge.js";
 
 const RESONANCE_DELAY_MS = 66.6;
 
@@ -19,7 +20,7 @@ const SPONSOR_COPY = {
   gold: {
     label: "Gold",
     copyLabel: "Copy Funding Handle",
-    value: "Send e-transfer to: boswellmike68@gmail.com"
+    value: "Send e-transfer to: bossbozitive@outlook.com"
   },
   founding: {
     label: "Founding Steward",
@@ -378,37 +379,27 @@ function createAdvisoryPortal({ safeModeGetter, orbController, personaController
       await append("boardroom", "Mission acknowledged: Fix the Planet. Consensus ring synchronized. All 13 perspectives active.", "Bozafire · Alignment");
     }
 
-    const result = wrapBBnCC(text);
+    // Send to lovesfire-ai server instead of local engine
+    const serverResult = await sendToLovesfire(text);
 
-    if (result.type === "casual") {
-      // Start speech immediately — voice reads as text types on screen
-      if (personaController) {
-        personaController.onAdvisory({
-          persona: "Alignment Chair",
-          type: "general",
-          message: result.message,
-          session: result.session
-        });
-      }
-      await append("boardroom", result.message, result.voice);
-    } else {
-      // Governance path — full engine response
-      const isMomentumPositive = result.session &&
-        (result.session.momentumTier === "positive" || result.session.momentumTier === "strong-positive");
-      if (!missionActive) {
-        orbController.setMissionActive(isMomentumPositive);
-      }
-
-      updateStatus(result.session);
-
-      const prefix = result.checkpoint ? "[CHECKPOINT] " : "";
-
-      // Start speech immediately — voice reads as text types on screen
-      if (personaController) {
-        personaController.onAdvisory(result.raw);
-      }
-      await append("boardroom", prefix + result.message, result.voice);
+    if (!serverResult.success) {
+      await append("boardroom", `[Server Error] ${serverResult.message}`, "System");
+      return;
     }
+
+    // Display the governance advisory message from MommaSpec
+    const displayMessage = serverResult.message;
+    
+    if (personaController) {
+      personaController.onAdvisory({
+        persona: "MommaSpec",
+        type: "governance",
+        message: displayMessage,
+        session: { momentum: 0, turns: 0 }
+      });
+    }
+    
+    await append("boardroom", displayMessage, "MommaSpec");
   });
 
   wrap.appendChild(log);

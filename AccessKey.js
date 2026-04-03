@@ -8,12 +8,17 @@
 // demo     = Potential sponsor preview. Limited interactions.
 // denied   = No access.
 
-const ACCESS_TIERS = {
-  // Owner key → Mike only
-  "34d15903662964f9a53c99ae6ef53b4cc0290d87416be15111f5169f769ae094": "owner",
-  // "demo" → demo
-  "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea": "demo"
-};
+// Access tier hashes — loaded from access_tiers.json (gitignored).
+// To regenerate: sha256(your_plaintext_key) → paste into access_tiers.json
+// Format: { "sha256_hash": "owner|sponsor|demo" }
+// NEVER commit real hashes to version control.
+let ACCESS_TIERS = {};
+try {
+  const resp = await fetch("./access_tiers.json");
+  if (resp.ok) ACCESS_TIERS = await resp.json();
+} catch (_) {
+  console.warn("[AccessKey] access_tiers.json not found — all keys denied. See README.");
+}
 
 // Sponsor keys can be added here as: hash → "sponsor"
 
